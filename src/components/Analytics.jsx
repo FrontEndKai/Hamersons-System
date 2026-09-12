@@ -1,0 +1,35 @@
+import { useMemo, useState } from 'react'
+import { AlertTriangle, ArrowDownRight, ArrowUpRight, BarChart3, CheckCircle2 } from 'lucide-react'
+import { Bar, BarChart, CartesianGrid, Cell, Legend, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
+import { calculateTotals, filterTransactions, groupByCategory, groupByMonth } from '../utils/calculationUtils'
+import { getCurrentMonth, getCurrentYear, getMonthName } from '../utils/dateUtils'
+import { money } from '../utils/currencyUtils'
+import { Stat } from './Dashboard'
+
+const expenseColors = ['#e05a47', '#f08a3c', '#d3a32f', '#7b61a8', '#2f80a9', '#319b78', '#d05b8b', '#65717b']
+const incomeColors = ['#176f9f', '#249b8f', '#4f78c8', '#7b61a8', '#d06a3f', '#3b9b61', '#b75b91', '#65717b']
+const changePercent = (current, previous) => previous === 0 ? (current === 0 ? 0 : 100) : ((current - previous) / Math.abs(previous)) * 100
+
+export default function Analytics({ transactions, categories }) {
+  const [month, setMonth] = useState(getCurrentMonth())
+  const [year, setYear] = useState(getCurrentYear())
+  const selected = filterTransactions(transactions, { month, year })
+  const previousDate = new Date(year, month - 2, 1)
+  const previous = filterTransactions(transactions, { month: previousDate.getMonth() + 1, year: previousDate.getFullYear() })
+  const currentTotals = calculateTotals(selected)
+  const previousTotals = calculateTotals(previous)
+  const expenseRows = groupByCategory(selected.filter(x => x.type === 'expense'), categories)
+  const incomeRows = groupByCategory(selected.filter(x => x.type === 'income'), categories)
+  const expenseTotal = currentTotals.totalExpenses
+  const incomeTotal = currentTotals.totalIncome
+  const categoryChart = expenseRows.map(row => ({ name: row.categoryName, amount: row.total, share: expenseTotal ? Math.round((row.total / expenseTotal) * 100) : 0 }))
+  const incomeChart = incomeRows.map(row => ({ name: row.categoryName, amount: row.total, share: incomeTotal ? Math.round((row.total / incomeTotal) * 100) : 0 }))
+  const trend = useMemo(() => groupByMonth(transactions).map(row => ({ name: row.label, income: row.income, expenses: row.expenses, net: row.net })), [transactions])
+  const expenseChange = changePercent(currentTotals.totalExpenses, previousTotals.totalExpenses)
+  const incomeChange = changePercent(currentTotals.totalIncome, previousTotals.totalIncome)
+  const years = Array.from(new Set([getCurrentYear(), ...transactions.map(x => Number(x.date.slice(0, 4)))] )).sort((a, b) => b - a)
+  return <><div className="page-intro"><div><div className="eyebrow">Category and period analysis</div><h2>Analytics</h2><p>Compare which categories drive income and expenses for a selected month.</p></div><div className="analytics-picker"><select value={month} onChange={event => setMonth(Number(event.target.value))}>{Array.from({ length: 12 }, (_, index) => <option key={index + 1} value={index + 1}>{getMonthName(index + 1)}</option>)}</select><select value={year} onChange={event => setYear(Number(event.target.value))}>{years.map(value => <option key={value} value={value}>{value}</option>)}</select></div></div><div className="stat-grid"><Stat label="Expense change" value={`${expenseChange >= 0 ? '+' : ''}${expenseChange.toFixed(1)}%`} tone={expenseChange > 0 ? 'expense' : 'income'} icon={expenseChange > 0 ? ArrowUpRight : ArrowDownRight} /><Stat label="Income change" value={`${incomeChange >= 0 ? '+' : ''}${incomeChange.toFixed(1)}%`} tone={incomeChange >= 0 ? 'income' : 'expense'} icon={incomeChange >= 0 ? ArrowUpRight : ArrowDownRight} /><Stat label="Net result" value={money(currentTotals.netIncome)} tone={currentTotals.netIncome >= 0 ? 'income' : 'expense'} icon={currentTotals.netIncome >= 0 ? CheckCircle2 : AlertTriangle} /><Stat label="Compared with" value={`${getMonthName(previousDate.getMonth() + 1)} ${previousDate.getFullYear()}`} tone="neutral" icon={BarChart3} /></div><div className="analytics-grid"><AnalyticsChart title="Expenses by category" data={categoryChart} /><AnalyticsChart title="Income by category" data={incomeChart} income /></div><section className="card analytics-trend"><h3>Monthly trend</h3><p>Income, expense, and net result across saved records</p><ResponsiveContainer width="100%" height={280}><LineChart data={trend}><CartesianGrid strokeDasharray="3 3" stroke="#dfe7e5" /><XAxis dataKey="name" tick={{ fontSize: 11 }} /><YAxis tick={{ fontSize: 11 }} /><Tooltip formatter={value => money(value)} /><Legend /><Line dataKey="income" stroke="#4c545b" strokeWidth={3} dot={false} /><Line dataKey="expenses" stroke="#a3a9ae" strokeWidth={3} dot={false} /><Line dataKey="net" stroke="#17191b" strokeWidth={2} dot={false} /></LineChart></ResponsiveContainer></section><section className="card analytics-table"><h3>Category comparison</h3><table><thead><tr><th>Category</th><th>Expense</th><th>Expense share</th><th>Income</th><th>Income share</th></tr></thead><tbody><CategoryRows expenseRows={expenseRows} incomeRows={incomeRows} expenseTotal={expenseTotal} incomeTotal={incomeTotal} /></tbody></table></section><div className="analytics-note">{currentTotals.netIncome >= 0 ? <><CheckCircle2 size={16} /> {getMonthName(month)} {year} is profitable based on the selected records.</> : <><AlertTriangle size={16} /> {getMonthName(month)} {year} recorded a loss because expenses exceeded income.</>}</div></>
+}
+
+function AnalyticsChart({ title, data, income }) { const palette = income ? incomeColors : expenseColors; return <section className="card analytics-chart"><h3>{title}</h3><p>Ranked from highest to lowest</p>{data.length ? <><ResponsiveContainer width="100%" height={280}><BarChart data={data} layout="vertical" margin={{ left: 12, right: 18 }}><CartesianGrid strokeDasharray="3 3" stroke="#dfe7e5" /><XAxis type="number" tick={{ fontSize: 10 }} /><YAxis dataKey="name" type="category" width={100} tick={{ fontSize: 10 }} /><Tooltip formatter={value => money(value)} /><Bar dataKey="amount" name={income ? 'Income' : 'Expense'}>{data.map((_, index) => <Cell key={index} fill={palette[index % palette.length]} />)}</Bar></BarChart></ResponsiveContainer><div className="category-key">{data.map((item, index) => <span key={item.name}><i style={{ backgroundColor: palette[index % palette.length] }} />{item.name}</span>)}</div></> : <div className="empty"><strong>No category records for this month</strong></div>}</section> }
+function CategoryRows({ expenseRows, incomeRows, expenseTotal, incomeTotal }) { const names = Array.from(new Set([...expenseRows, ...incomeRows].map(x => x.categoryName))); return names.map(name => { const expense = expenseRows.find(x => x.categoryName === name)?.total || 0; const income = incomeRows.find(x => x.categoryName === name)?.total || 0; return <tr key={name}><td>{name}</td><td>{money(expense)}</td><td>{expenseTotal ? `${Math.round(expense / expenseTotal * 100)}%` : '0%'}</td><td>{money(income)}</td><td>{incomeTotal ? `${Math.round(income / incomeTotal * 100)}%` : '0%'}</td></tr> }) }
