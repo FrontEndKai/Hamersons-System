@@ -7,8 +7,7 @@
  */
 
 import db from './db';
-import { generateId } from '../utils/formatUtils';
-import { toStorageDate, getNow } from '../utils/dateUtils';
+import { getNow } from '../utils/dateUtils';
 
 // ============================================
 // TRANSACTIONS
@@ -262,37 +261,6 @@ async function seedDefaultDataOnce() {
   for (const dept of departments) {
     await db.departments.add({ ...dept, createdAt: new Date().toISOString() });
   }
-}
-
-export async function seedDemoData() {
-  const settings = await getSettings();
-  if (settings.demoDataLoaded || await db.transactions.count() > 0) return false;
-
-  const categories = await getAllCategories();
-  const paymentMethods = await getAllPaymentMethods();
-  const departments = await getAllDepartments();
-  const categoryId = name => categories.find(c => c.name === name)?.id;
-  const paymentMethodId = name => paymentMethods.find(p => p.name === name)?.id;
-  const departmentId = name => departments.find(d => d.name === name)?.id;
-  const demo = [
-    ['2024-01-12', 'expense', 'Generator maintenance', 'Maintenance', 'Engineering / Maintenance', 'Bank Transfer', 18500],
-    ['2024-03-08', 'income', 'March room bookings', 'Room Revenue', 'Front Office', 'Bank Transfer', 218000],
-    ['2024-06-21', 'expense', 'Guest amenities', 'Supplies', 'Housekeeping', 'Credit Card', 12400],
-    ['2025-02-04', 'expense', 'Power and water bill', 'Utilities', 'Administration', 'Bank Transfer', 33200],
-    ['2025-05-17', 'income', 'Corporate event package', 'Events Revenue', 'Sales & Marketing', 'Bank Transfer', 156000],
-    ['2025-09-23', 'expense', 'Kitchen provisions', 'Food & Beverage', 'Food & Beverage', 'Cash', 28750],
-    ['2026-01-10', 'income', 'January room revenue', 'Room Revenue', 'Front Office', 'Bank Transfer', 264000],
-    ['2026-04-14', 'expense', 'Aircon repair', 'Maintenance', 'Engineering / Maintenance', 'Bank Transfer', 8500],
-    ['2026-07-03', 'expense', 'Digital campaign', 'Marketing', 'Sales & Marketing', 'GCash', 14500],
-    ['2026-09-05', 'income', 'Weekend room revenue', 'Room Revenue', 'Front Office', 'Credit Card', 98500]
-  ].map(([date, type, description, category, department, paymentMethod, amount], index) => ({
-    date, type, description, categoryId: categoryId(category), departmentId: departmentId(department),
-    paymentMethodId: paymentMethodId(paymentMethod), amount, reference: `DEMO-${date.replaceAll('-', '')}-${index + 1}`,
-    supplier: type === 'expense' ? 'Demo Supplier' : '', notes: 'Clearly labelled demo record', isDemo: true
-  }));
-  await bulkAddTransactions(demo);
-  await updateSettings({ demoDataLoaded: true });
-  return true;
 }
 
 // ============================================

@@ -1,16 +1,36 @@
-# React + Vite
+# Hamersons Hotel Accounting System
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+A Vite + React hotel accounting workspace for recording expenses and income once, then viewing the same ledger through dashboards, reports, calendar history, monthly records, analytics, and comparisons.
 
-Currently, two official plugins are available:
+## Run Locally
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+```bash
+npm install
+npm run dev
+```
 
-## React Compiler
+Open `http://localhost:5173/`.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Validate
 
-## Expanding the Oxlint configuration
+```bash
+npm run build
+npm run lint
+```
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+## Main Workflows
+
+- **Manual Entry**: record an expense or income transaction with date, category, department, payment method, amount, supplier, and reference.
+- **Dashboard**: review overall income, expenses, net income, and monthly movement.
+- **Calendar**: choose an exact day, month, or year and view its records.
+- **Records**: review, add, edit, and delete historical transactions.
+- **Monthly Records**: calculate monthly totals, category/department/payment breakdowns, and an automatic management income statement.
+- **Analytics**: compare expense and income categories with charts, percentages, and period changes.
+- **Income Statement**: view revenue, expenses, and net income from the active records.
+- **Import/Export**: import XLSX/CSV rows and export filtered records or a full JSON backup.
+
+## Data Model
+
+Each transaction is stored once in IndexedDB through `src/services/dataService.js`. Date, month, year, category, department, payment method, reports, and charts are derived views of that same record. Categories, payment methods, and departments use stable IDs so labels can be managed without breaking historical transactions.
+
+The default timezone is `Asia/Manila`. Hotel name, address, currency symbol, and timezone can be configured in Settings.
