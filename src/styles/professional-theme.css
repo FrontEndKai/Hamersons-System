@@ -73,6 +73,7 @@ td strong { color: var(--tortoise-950); }
 .danger-button:hover { background: #7e472c; }
 .expense-summary > div { background: linear-gradient(120deg, var(--tortoise-950), var(--tortoise-800)); border: 1px solid #2c594a; }
 .category-card:hover { border-color: var(--tortoise-500); box-shadow: 0 10px 24px rgba(20,49,41,.11); }
+.category-icon { background: var(--silver-200) !important; color: var(--tortoise-800) !important; }
 .category-card-name, .category-card > strong { color: var(--tortoise-950); }
 .category-card-footer { color: var(--tortoise-700); }
 .category-add { background: transparent; border-color: var(--silver-400); color: var(--quiet); box-shadow: none; }
