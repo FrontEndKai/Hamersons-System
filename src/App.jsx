@@ -26,6 +26,7 @@ import './styles/calendar.css'
 import './styles/monthly.css'
 import './styles/analytics.css'
 import './styles/manual-entry.css'
+import './styles/professional-theme.css'
 
 const today = () => toStorageDate(getNow())
 const monthStart = () => { const now = getNow(); return toStorageDate(new Date(now.getFullYear(), now.getMonth(), 1)) }

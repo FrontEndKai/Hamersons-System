@@ -1,0 +1,92 @@
+:root {
+  --tortoise-950: #102d27;
+  --tortoise-900: #173d34;
+  --tortoise-800: #245446;
+  --tortoise-700: #376959;
+  --tortoise-500: #6f9584;
+  --silver-50: #f7f9f8;
+  --silver-100: #eef2f0;
+  --silver-200: #dce4e0;
+  --silver-400: #9aa9a3;
+  --graphite: #25322f;
+  --quiet: #6f7e79;
+  --copper: #c48754;
+}
+
+body, .app-shell, .main { background: var(--silver-100); color: var(--graphite); }
+.sidebar { width: 244px; background: linear-gradient(165deg, var(--tortoise-950), var(--tortoise-900) 52%, #315e4e); border-right: 1px solid #385d51; padding: 22px 13px; }
+.brand { padding: 0 12px 30px; gap: 10px; }
+.brand-mark { width: 35px; height: 35px; border-radius: 8px; background: linear-gradient(145deg, #dce4e0, #9aa9a3); color: var(--tortoise-950); }
+.brand strong { color: #f7faf8; font-family: Manrope; letter-spacing: .01em; }
+.brand span { color: #afc3ba; }
+.workspace-label { color: #83a99a; padding: 0 12px 8px; }
+.sidebar nav { gap: 2px; }
+.sidebar nav button { color: #b8cbc3; border-radius: 6px; padding: 10px 12px; }
+.sidebar nav button:hover { background: rgba(255,255,255,.08); color: #fff; }
+.sidebar nav button.active { background: linear-gradient(90deg, #2e6251, #3d705d); color: #fff; box-shadow: inset 3px 0 #c6d1cc, 0 3px 12px rgba(9, 31, 25, .18); }
+.sidebar-footer { color: #91b1a4; }
+.sidebar-footer i { background: #a8d0a4; }
+.main { margin-left: 244px; width: calc(100% - 244px); }
+.topbar { height: 82px; padding: 19px 38px; background: rgba(247,249,248,.96); border-bottom: 1px solid var(--silver-200); }
+.topbar h1 { color: var(--tortoise-950); font: 800 22px Manrope; letter-spacing: -.015em; }
+.content { max-width: 1500px; padding: 30px 38px 58px; }
+.page-intro { margin-bottom: 22px; }
+.page-intro h2 { color: var(--tortoise-950); font: 800 25px Manrope; letter-spacing: -.02em; }
+.page-intro p, .card p { color: var(--quiet); }
+.card, .filter-bar, .category-card { background: var(--silver-50); border: 1px solid var(--silver-200); border-radius: 9px; box-shadow: 0 5px 18px rgba(20, 49, 41, .055); }
+.card h3 { color: var(--tortoise-950); }
+.button { border-radius: 6px; }
+.button.primary { background: var(--tortoise-800) !important; color: #fff !important; box-shadow: 0 3px 8px rgba(28, 70, 56, .16); }
+.button.primary:hover { background: var(--tortoise-700) !important; }
+.button.secondary { background: var(--silver-50); color: var(--tortoise-900); border-color: var(--silver-400); }
+.button.secondary:hover { background: #e7eeeb; border-color: var(--tortoise-500); }
+.button.ghost { color: var(--tortoise-700); }
+.button.ghost:hover { background: #e5eeea; color: var(--tortoise-950); }
+.filter-bar { padding: 12px; margin-bottom: 23px; }
+.filter-bar input, .filter-bar select, .settings-form input, .settings-form select, .inline-form input, .form-grid input, .form-grid select, .form-grid textarea, .comparison-form input, .comparison-form select { background: #fff; border-color: var(--silver-200); color: var(--graphite); border-radius: 6px; }
+.filter-bar input:focus, .filter-bar select:focus, .form-grid input:focus, .form-grid select:focus, .form-grid textarea:focus { border-color: var(--tortoise-500); box-shadow: 0 0 0 3px rgba(111,149,132,.16); }
+.stat-grid { gap: 14px; margin-bottom: 20px; }
+.stat { min-height: 86px; }
+.stat strong { color: var(--tortoise-950); }
+.stat.income .stat-icon { background: #dcebe3 !important; color: var(--tortoise-800) !important; }
+.stat.expense .stat-icon { background: #f0e3d9 !important; color: #a5673d !important; }
+.stat.neutral .stat-icon { background: #e2e8e6 !important; color: #61726c !important; }
+.chart-grid, .report-grid, .analytics-grid, .calendar-layout, .manual-entry-layout { gap: 17px; }
+.chart-card, .analytics-chart, .analytics-trend, .analytics-table, .manual-entry-card, .entry-summary, .income-statement { padding: 21px; }
+th { background: var(--silver-100); color: #687873; }
+td { border-color: #e7edeb; color: #566963; }
+td strong { color: var(--tortoise-950); }
+.pill.expense { background: #f0e3d9; color: #9a6038; }
+.pill.income { background: #dcebe3; color: var(--tortoise-800); }
+.report-row.total { border-color: var(--tortoise-800); }
+.master-tabs button { background: var(--silver-50); border-color: var(--silver-200); color: var(--tortoise-700); }
+.master-tabs .selected { background: var(--tortoise-800); border-color: var(--tortoise-800); color: #fff; }
+.active-text { color: var(--tortoise-700); }
+.empty { color: var(--quiet); }
+.modal-backdrop { background: rgba(16,45,39,.58); }
+.modal { border-radius: 11px; border: 1px solid var(--silver-200); }
+.confirm-dialog { border-color: var(--silver-200); }
+.confirm-icon { background: #f0e3d9; color: #9a6038; }
+.delete-lock { background: #fbf0e9; border-color: #e5c2aa; color: #975c35; }
+.delete-lock.unlocked { background: #e1f0e8; border-color: #b4d2c1; color: var(--tortoise-700); }
+.danger-button { background: #9a5b39; }
+.danger-button:hover { background: #7e472c; }
+.expense-summary > div { background: linear-gradient(120deg, var(--tortoise-950), var(--tortoise-800)); border: 1px solid #2c594a; }
+.category-card:hover { border-color: var(--tortoise-500); box-shadow: 0 10px 24px rgba(20,49,41,.11); }
+.category-card-name, .category-card > strong { color: var(--tortoise-950); }
+.category-card-footer { color: var(--tortoise-700); }
+.category-add { background: transparent; border-color: var(--silver-400); color: var(--quiet); box-shadow: none; }
+.category-add:hover { background: #e7efeb; border-color: var(--tortoise-500); color: var(--tortoise-800); }
+.category-detail { background: var(--silver-50); }
+.category-sort, .category-transaction { border-color: var(--silver-200); }
+.category-transaction span, .category-share, .category-subcategories { color: var(--quiet); }
+.danger-text { color: #9a5b39; }
+@media (max-width: 760px) {
+  .sidebar { width: 244px; }
+  .main { margin-left: 0; width: 100%; }
+  .topbar { height: 72px; padding: 16px 18px; }
+  .content { padding: 22px 15px 46px; }
+  .expense-summary { grid-template-columns: 1fr; }
+  .category-card-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .category-card { min-height: 190px; padding: 14px; }
+}
