@@ -106,7 +106,9 @@ td strong { color: var(--tortoise-950); }
 body, .app-shell, .main { background: #f2f5f3; color: var(--ink-800); font-size: 14px; }
 html, body, .sidebar { scrollbar-width: none; -ms-overflow-style: none; }
 html::-webkit-scrollbar, body::-webkit-scrollbar, .sidebar::-webkit-scrollbar { display: none; width: 0; height: 0; }
-.sidebar { width: 232px; padding: 24px 12px; background: #173b32; border-right: 0; }
+.sidebar { width: 232px; height: 100vh; min-height: 100vh; position: fixed; top: 0; left: 0; z-index: 6; padding: 24px 12px; background: #173b32; border-right: 0; transform: none; display: flex; flex-direction: column; }
+.sidebar.open { transform: none; }
+.sidebar .brand { display: flex; }
 .main { margin-left: 232px; width: calc(100% - 232px); }
 .brand { padding: 0 12px 28px; }
 .brand-mark { width: 34px; height: 34px; border-radius: 7px; background: #d8e5df; }
@@ -115,8 +117,14 @@ html::-webkit-scrollbar, body::-webkit-scrollbar, .sidebar::-webkit-scrollbar { 
 .sidebar nav button { padding: 10px 12px; border-radius: 5px; font-size: 13px; }
 .sidebar nav button.active { background: #28594c !important; box-shadow: inset 3px 0 #d6e1dc !important; }
 .sidebar-footer { padding: 12px; font-size: 11px; }
-.topbar { height: 82px; position: sticky; top: 0; z-index: 4; padding: 20px 38px; background: rgba(255,255,255,.96); border-bottom-color: var(--line); box-shadow: 0 2px 10px rgba(29, 61, 51, .04); }
+.topbar { height: 82px; position: sticky; top: 0; z-index: 7; padding: 20px 38px; background: rgba(255,255,255,.96); border-bottom-color: var(--line); box-shadow: 0 2px 10px rgba(29, 61, 51, .04); }
+.mobile-menu { display: none; }
+.topbar::before { display: none; }
+.topbar > div:first-of-type { margin-left: 0; }
+.topbar > div:first-of-type { margin-left: 0; }
 .topbar h1 { margin-top: 3px; font-size: 23px; color: var(--ink-950); }
+.topbar h1 { display: block; }
+.topbar .eyebrow { font-size: 11px; letter-spacing: .08em; }
 .content { width: 100%; max-width: none; padding: 32px 42px 62px; }
 .page-intro { margin-bottom: 26px; }
 .page-intro h2 { margin: 6px 0 0; font-size: 27px; color: var(--ink-950); }
@@ -189,9 +197,11 @@ td { color: #566862; }
   .topbar { padding: 20px 28px; }
 }
 @media (max-width: 760px) {
-  .sidebar { width: 232px; }
+  .sidebar { width: 232px; top: 0; height: 100vh; min-height: 100vh; }
   .main { margin-left: 0; width: 100%; }
   .topbar { height: 70px; padding: 15px 16px; }
+  .mobile-menu { display: grid !important; }
+  .topbar > div:first-of-type { margin-left: 0; }
   .content { padding: 22px 15px 44px; }
   .page-intro { margin-bottom: 18px; }
   .page-intro h2 { font-size: 21px; }
