@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
-import { BarChart3, CalendarDays, FileText, Hotel, LayoutDashboard, Menu, Plus, Receipt, Settings, X } from 'lucide-react'
+import { BarChart3, FileText, Hotel, LayoutDashboard, Menu, Plus, Receipt, Settings, X } from 'lucide-react'
 import toast, { Toaster } from 'react-hot-toast'
 import * as XLSX from 'xlsx'
 import * as service from './services/dataService'
@@ -12,7 +12,6 @@ import Ledger from './components/Ledger'
 import Reports from './components/Reports'
 import Comparison from './components/Comparison'
 import Records from './components/Records'
-import CalendarView from './components/CalendarView'
 import MonthlyRecords from './components/MonthlyRecords'
 import Analytics from './components/Analytics'
 import ManualEntry from './components/ManualEntry'
@@ -23,7 +22,6 @@ import ConfirmDialog from './components/ConfirmDialog'
 import CategoryEditModal from './components/CategoryEditModal'
 import './App.css'
 import './styles/finance-theme.css'
-import './styles/calendar.css'
 import './styles/monthly.css'
 import './styles/analytics.css'
 import './styles/manual-entry.css'
@@ -34,7 +32,7 @@ const monthStart = () => { const now = getNow(); return toStorageDate(new Date(n
 const yearStart = () => { const now = getNow(); return toStorageDate(new Date(now.getFullYear(), 0, 1)) }
 const emptyFilters = () => ({ type: '', search: '', categoryId: '', departmentId: '', paymentMethodId: '', startDate: monthStart(), endDate: today() })
 const blankForm = type => ({ type, date: today(), description: '', reference: '', supplier: '', categoryId: '', departmentId: '', paymentMethodId: '', amount: '', notes: '' })
-const nav = [['dashboard', 'Dashboard', LayoutDashboard], ['manual', 'Manual Entry', Plus], ['calendar', 'Calendar', CalendarDays], ['records', 'Records', Receipt], ['monthly', 'Monthly Records', Receipt], ['analytics', 'Analytics', BarChart3], ['expenses', 'All Expenses', Receipt], ['reports', 'Income Statement', FileText], ['comparison', 'Period Comparison', BarChart3], ['masters', 'Categories & Methods', Receipt], ['settings', 'Settings', Settings]]
+const nav = [['dashboard', 'Dashboard', LayoutDashboard], ['manual', 'Manual Entry', Plus], ['records', 'Records', Receipt], ['monthly', 'Monthly Records', Receipt], ['analytics', 'Analytics', BarChart3], ['expenses', 'All Expenses', Receipt], ['reports', 'Income Statement', FileText], ['comparison', 'Period Comparison', BarChart3], ['masters', 'Categories & Methods', Receipt], ['settings', 'Settings', Settings]]
 
 export default function App() {
   const [view, setView] = useState('dashboard'), [tx, setTx] = useState([]), [categories, setCategories] = useState([]), [methods, setMethods] = useState([]), [departments, setDepartments] = useState([]), [settings, setSettings] = useState({}), [form, setForm] = useState(null), [editing, setEditing] = useState(null), [categoryEditing, setCategoryEditing] = useState(null), [pendingDelete, setPendingDelete] = useState(null), [mobile, setMobile] = useState(false)

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { BarChart3, CircleDollarSign, Plus, Receipt, Wallet } from 'lucide-react'
 import { Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
 import { calculateStats, calculateTotals, filterTransactions, groupByCategory, groupByDepartment, groupByPaymentMethod } from '../utils/calculationUtils'
@@ -10,6 +10,8 @@ import { Table } from './Ledger'
 export default function MonthlyRecords({ transactions, categories, methods, departments, names, onNew, onEdit, onDelete }) {
   const [month, setMonth] = useState(getCurrentMonth())
   const [year, setYear] = useState(getCurrentYear())
+  const [monthInitialized, setMonthInitialized] = useState(false)
+  useEffect(() => { if (!monthInitialized && transactions.length) { const latest = [...transactions].sort((a, b) => b.date.localeCompare(a.date))[0]; setYear(Number(latest.date.slice(0, 4))); setMonth(Number(latest.date.slice(5, 7))); setMonthInitialized(true) } }, [transactions, monthInitialized])
   const filtered = filterTransactions(transactions, { month, year })
   const expenses = filtered.filter(transaction => transaction.type === 'expense')
   const totals = calculateTotals(filtered)

@@ -149,6 +149,10 @@ td { color: #566862; }
 .dashboard-date-picker strong { display: block; margin-top: 3px; color: var(--ink-950); font-size: 15px; }
 .dashboard-date-picker label { display: flex; align-items: center; gap: 8px; color: var(--accent); font-size: 12px; font-weight: 700; }
 .dashboard-date-picker select { min-width: 245px; padding: 9px 11px; border: 1px solid #cbdad4; border-radius: 5px; background: var(--surface); color: var(--ink-800); font-size: 12px; }
+.records-date-picker { display: flex; align-items: center; gap: 18px; margin-bottom: 20px; padding: 14px 18px; }
+.records-date-picker > strong { margin-right: auto; color: var(--ink-950); font-family: Manrope; }
+.records-date-picker label { display: flex; align-items: center; gap: 7px; color: var(--accent); font-size: 12px; font-weight: 700; }
+.records-date-picker select { min-width: 180px; padding: 9px 11px; border: 1px solid #cbdad4; border-radius: 5px; background: var(--surface); color: var(--ink-800); font-size: 12px; }
 .dashboard-calendar { max-width: 430px; margin: 0 0 18px; padding: 16px; }
 .dashboard-calendar-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; color: var(--ink-950); }
 .dashboard-calendar-head strong { font-family: Manrope; font-size: 14px; }
@@ -194,6 +198,10 @@ td { color: #566862; }
   .dashboard-date-picker { align-items: stretch; flex-direction: column; gap: 11px; }
   .dashboard-date-picker label { justify-content: space-between; }
   .dashboard-date-picker select { min-width: 0; flex: 1; }
+  .records-date-picker { align-items: stretch; flex-direction: column; gap: 10px; }
+  .records-date-picker > strong { margin-right: 0; }
+  .records-date-picker label { justify-content: space-between; }
+  .records-date-picker select { min-width: 0; flex: 1; }
   .dashboard-calendar { max-width: none; }
   .import-batch-row { align-items: flex-start; flex-direction: column; gap: 10px; padding: 15px 18px; }
 }
