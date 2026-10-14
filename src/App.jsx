@@ -31,7 +31,7 @@ const monthStart = () => { const now = getNow(); return toStorageDate(new Date(n
 const yearStart = () => { const now = getNow(); return toStorageDate(new Date(now.getFullYear(), 0, 1)) }
 const emptyFilters = () => ({ type: '', search: '', categoryId: '', departmentId: '', paymentMethodId: '', startDate: monthStart(), endDate: today() })
 const blankForm = type => ({ type, date: today(), description: '', reference: '', supplier: '', categoryId: '', departmentId: '', paymentMethodId: '', amount: '', notes: '' })
-const nav = [['dashboard', 'Dashboard', LayoutDashboard], ['manual', 'Manual Entry', Plus], ['records', 'Records', Receipt], ['monthly', 'Monthly Records', Receipt], ['expenses', 'All Expenses', Receipt], ['reports', 'Income Statement', FileText], ['comparison', 'Period Comparison', BarChart3], ['masters', 'Categories & Methods', Receipt], ['settings', 'Settings', Settings]]
+const nav = [['dashboard', 'Dashboard', LayoutDashboard], ['manual', 'Manual Entry', Plus], ['records', 'Records', Receipt], ['monthly', 'Monthly Records', Receipt], ['comparison', 'Period Comparison', BarChart3], ['masters', 'Categories & Methods', Receipt], ['settings', 'Settings', Settings]]
 
 export default function App() {
   const [view, setView] = useState('dashboard'), [tx, setTx] = useState([]), [categories, setCategories] = useState([]), [methods, setMethods] = useState([]), [departments, setDepartments] = useState([]), [settings, setSettings] = useState({}), [form, setForm] = useState(null), [editing, setEditing] = useState(null), [categoryEditing, setCategoryEditing] = useState(null), [pendingDelete, setPendingDelete] = useState(null), [mobile, setMobile] = useState(false)
