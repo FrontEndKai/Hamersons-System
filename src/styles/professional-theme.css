@@ -146,6 +146,7 @@ td { color: #566862; }
 .expense-summary > div { border-radius: 7px; padding: 16px 18px; background: #214d41; }
 .expense-summary strong { font-size: 22px; }
 .dashboard-date-picker { display: flex; align-items: center; justify-content: flex-end; gap: 18px; margin-bottom: 18px; padding: 0; background: transparent; border: 0; box-shadow: none; }
+.dashboard-date-picker > div:not(.dashboard-date-controls) { display: none; }
 .dashboard-date-controls { display: flex; align-items: center; justify-content: flex-end; gap: 14px; width: 100%; }
 .dashboard-date-picker strong { display: block; margin-top: 3px; color: var(--ink-950); font-size: 15px; }
 .dashboard-date-picker label { display: flex; align-items: center; gap: 8px; color: var(--accent); font-size: 12px; font-weight: 700; }
