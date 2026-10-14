@@ -46,6 +46,15 @@ export async function deleteTransaction(id) {
   await db.transactions.delete(id);
 }
 
+export async function deleteTransactionsByImportBatch(importBatchId) {
+  await db.transactions.filter(transaction => transaction.importBatchId === importBatchId).delete();
+}
+
+export async function deleteAllTransactions(type) {
+  if (type) await db.transactions.where('type').equals(type).delete();
+  else await db.transactions.clear();
+}
+
 export async function bulkAddTransactions(transactions) {
   const now = getNow();
   const records = transactions.map(t => ({
