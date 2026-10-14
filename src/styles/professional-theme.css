@@ -145,7 +145,8 @@ td { color: #566862; }
 .expense-summary { gap: 12px; margin: 20px 0; }
 .expense-summary > div { border-radius: 7px; padding: 16px 18px; background: #214d41; }
 .expense-summary strong { font-size: 22px; }
-.dashboard-date-picker { display: flex; align-items: center; justify-content: space-between; gap: 18px; margin-bottom: 18px; padding: 14px 18px; }
+.dashboard-date-picker { display: flex; align-items: center; justify-content: flex-end; gap: 18px; margin-bottom: 18px; padding: 0; background: transparent; border: 0; box-shadow: none; }
+.dashboard-date-controls { display: flex; align-items: center; justify-content: flex-end; gap: 14px; width: 100%; }
 .dashboard-date-picker strong { display: block; margin-top: 3px; color: var(--ink-950); font-size: 15px; }
 .dashboard-date-picker label { display: flex; align-items: center; gap: 8px; color: var(--accent); font-size: 12px; font-weight: 700; }
 .dashboard-date-picker select { min-width: 245px; padding: 9px 11px; border: 1px solid #cbdad4; border-radius: 5px; background: var(--surface); color: var(--ink-800); font-size: 12px; }
@@ -196,6 +197,7 @@ td { color: #566862; }
   .stat { padding: 13px; }
   .category-card { min-height: 180px; padding: 13px; }
   .dashboard-date-picker { align-items: stretch; flex-direction: column; gap: 11px; }
+  .dashboard-date-controls { align-items: stretch; flex-direction: column; gap: 10px; }
   .dashboard-date-picker label { justify-content: space-between; }
   .dashboard-date-picker select { min-width: 0; flex: 1; }
   .records-date-picker { align-items: stretch; flex-direction: column; gap: 10px; }
