@@ -192,6 +192,7 @@ td { color: #566862; }
 .import-batch-row strong { color: var(--ink-950); font-size: 13px; }
 .import-batch-row span { margin-top: 4px; color: var(--ink-600); font-size: 11px; }
 .import-batch-row .button { flex: 0 0 auto; }
+.import-history-actions { display: flex; justify-content: flex-end; padding: 16px 22px 18px; }
 @media (max-width: 1100px) {
   .content { padding: 30px 28px 54px; }
   .topbar { padding: 20px 28px; }
@@ -217,4 +218,5 @@ td { color: #566862; }
   .records-date-picker select { min-width: 0; flex: 1; }
   .dashboard-calendar { max-width: none; }
   .import-batch-row { align-items: flex-start; flex-direction: column; gap: 10px; padding: 15px 18px; }
+  .import-history-actions { justify-content: flex-start; padding: 14px 18px 18px; }
 }
