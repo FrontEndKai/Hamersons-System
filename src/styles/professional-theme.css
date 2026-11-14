@@ -220,3 +220,47 @@ td { color: #566862; }
   .import-batch-row { align-items: flex-start; flex-direction: column; gap: 10px; padding: 15px 18px; }
   .import-history-actions { justify-content: flex-start; padding: 14px 18px 18px; }
 }
+
+@media (max-width: 760px) {
+  html, body { overflow-x: hidden; }
+  .sidebar { transform: translateX(-105%); transition: transform .2s ease; box-shadow: 12px 0 28px rgba(9, 31, 25, .18); }
+  .sidebar.open { transform: translateX(0); }
+  .mobile-close { display: grid !important; margin-left: auto; }
+  .topbar { gap: 10px; }
+  .topbar > div:first-of-type { min-width: 0; flex: 1 1 auto; }
+  .topbar h1 { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 18px; }
+  .top-actions { flex: 0 0 auto; gap: 6px; }
+  .top-actions .button { min-height: 36px; padding: 8px; font-size: 0; }
+  .page-intro { align-items: stretch; flex-direction: column; gap: 14px; }
+  .page-intro .button-row { flex-wrap: wrap; }
+  .page-intro .button-row .button { flex: 1 1 130px; justify-content: center; }
+  .card-head { gap: 14px; flex-wrap: wrap; }
+  .card-head > .button, .card-head > .upload { flex: 1 1 180px; justify-content: center; }
+  .filter-bar { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .filter-bar .preset-row, .filter-bar .search-wrap, .filter-bar .button { grid-column: 1 / -1; }
+  .filter-bar .search-wrap { min-width: 0; }
+  .table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .table-scroll table { min-width: 760px; }
+  .modal-backdrop { padding: 14px; }
+  .modal { width: min(100%, 560px); max-height: calc(100vh - 28px); overflow-y: auto; }
+  .comparison-form, .form-grid { grid-template-columns: 1fr; }
+  .form-grid .span-2 { grid-column: auto; }
+  .entry-type { display: grid; grid-template-columns: 1fr 1fr; }
+  .calendar-toolbar { align-items: stretch; flex-direction: column; gap: 12px; }
+  .calendar-selectors { display: grid; grid-template-columns: 1fr 1fr; }
+  .calendar-selectors select { min-width: 0; width: 100%; }
+}
+
+@media (max-width: 430px) {
+  .topbar { padding: 13px 12px; }
+  .topbar .eyebrow { font-size: 8px; }
+  .content { padding: 20px 12px 40px; }
+  .stat-grid, .category-card-grid { grid-template-columns: 1fr; }
+  .category-card { min-height: 150px; }
+  .filter-bar { padding: 10px; grid-template-columns: 1fr; }
+  .filter-bar > * { grid-column: 1 / -1 !important; }
+  .button-row .button { width: 100%; }
+  .dashboard-calendar-day { min-height: 31px; }
+  .dashboard-calendar-weekdays, .dashboard-calendar-grid { gap: 2px; }
+  .empty { padding: 22px 14px; }
+}
