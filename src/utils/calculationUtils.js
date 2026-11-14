@@ -298,7 +298,8 @@ export function calculateComparison(transactionsA, transactionsB) {
   const safePercent = (oldVal, newVal) => {
     if (oldVal === 0 && newVal === 0) return 0;
     if (oldVal === 0) return newVal > 0 ? 100 : -100;
-    return ((newVal - oldVal) / Math.abs(oldVal)) * 100;
+    const change = ((newVal - oldVal) / Math.abs(oldVal)) * 100;
+    return Math.max(-100, Math.min(100, change));
   };
   
   return {

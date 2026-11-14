@@ -8,7 +8,11 @@ import { Stat } from './Dashboard'
 
 const expenseColors = ['#e05a47', '#f08a3c', '#d3a32f', '#7b61a8', '#2f80a9', '#319b78', '#d05b8b', '#65717b']
 const incomeColors = ['#176f9f', '#249b8f', '#4f78c8', '#7b61a8', '#d06a3f', '#3b9b61', '#b75b91', '#65717b']
-const changePercent = (current, previous) => previous === 0 ? (current === 0 ? 0 : 100) : ((current - previous) / Math.abs(previous)) * 100
+const changePercent = (current, previous) => {
+  if (previous === 0) return current === 0 ? 0 : 100
+  const change = ((current - previous) / Math.abs(previous)) * 100
+  return Math.max(-100, Math.min(100, change))
+}
 
 export default function Analytics({ transactions, categories }) {
   const [month, setMonth] = useState(getCurrentMonth())
